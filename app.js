@@ -3,7 +3,8 @@
  * Module dependencies.
  */
 
-var express = require('express');
+var express = require('express'),
+  Event = require('./models/event');
 
 var app = module.exports = express.createServer();
 
@@ -36,7 +37,12 @@ app.get('/', function(req, res){
 
 app.get('/calendar.json', function(req, res) {
   res.contentType('json');
-  res.send('[{title:"Dynamic event", start:"2011-06-12 14:30:00",end:"2011-06-12 15:00:00",allDay:false}]');
+  //res.end(JSON.stringify([{title:"Dynamic event", start:"2011-06-12 14:30:00",end:"2011-06-12 15:00:00",allDay:false}]));
+  //res.end(JSON.stringify([new Event('Test 1', '2011-06-12 10:30:00', '2011-06-12 11:00:00', false)]));
+  //res.end(JSON.stringify(Event.db));
+  Event.all(function(whatever, arr){
+    res.end(JSON.stringify(arr));
+  });
 });
 
 app.listen(3000);

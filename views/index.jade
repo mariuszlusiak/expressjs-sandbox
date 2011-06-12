@@ -23,8 +23,9 @@ script
       eventClick : function(event, jsEvent, view) {
         alert(event.title);
       },
-      //events : [{title:"Dynamic event", start:"2011-06-12 14:30:00",end:"2011-06-12 15:00:00",allDay:false}]
-      events : '/calendar.json'
-      
+      //events : '/calendar.json'
+      eventSources : [{
+        url : '/calendar.json'
+      }]
     })
   });
