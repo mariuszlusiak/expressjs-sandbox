@@ -1,0 +1,30 @@
+#calendar
+script
+  $(function() {
+    $('#calendar').fullCalendar({
+      firstDay : 1,
+      header : {
+        left : 'prev,next today',
+        center : 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      dayClick : function(date, allDay, jsEvent, view) {
+        $('#calendar').fullCalendar('addEventSource', {
+          events : [
+            {
+              title : 'Dynamic event',
+              start : '2011-06-12 14:30:00',
+              end : '2011-06-12 15:00:00',
+              allDay : false
+            }
+          ]
+        });
+      },
+      eventClick : function(event, jsEvent, view) {
+        alert(event.title);
+      },
+      //events : [{title:"Dynamic event", start:"2011-06-12 14:30:00",end:"2011-06-12 15:00:00",allDay:false}]
+      events : '/calendar.json'
+      
+    })
+  });
